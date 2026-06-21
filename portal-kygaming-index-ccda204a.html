@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开元棋牌 · 博弈之道</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f5f3f0;
+            color: #2c2b28;
+            line-height: 1.6;
+        }
+
+        /* 深色 Hero */
+        .hero {
+            background: linear-gradient(135deg, #0f0e0c 0%, #2a2722 50%, #1f1c17 100%);
+            color: #efe9dd;
+            padding: 5rem 1.5rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(220,180,110,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero .sub {
+            font-size: 1.15rem;
+            color: #c7bba7;
+            max-width: 650px;
+            margin: 0 auto 2.2rem;
+            font-weight: 300;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: rgba(255, 215, 130, 0.12);
+            border: 1px solid rgba(220, 180, 110, 0.3);
+            padding: 0.5rem 1.6rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #dcc48a;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(2px);
+        }
+
+        /* 浅色正文区 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.65rem;
+            font-weight: 500;
+            margin-bottom: 1.8rem;
+            border-left: 4px solid #b4945a;
+            padding-left: 1rem;
+            color: #2c2b28;
+        }
+
+        .section-sub {
+            font-size: 1rem;
+            color: #4d4a44;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+        }
+
+        /* 优势卡片 */
+        .grid-adv {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.8rem;
+            margin: 2.5rem 0 3rem;
+        }
+
+        .adv-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.8rem 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            border: 1px solid #e7e2d9;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .adv-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+        }
+
+        .adv-card h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #2c2b28;
+        }
+
+        .adv-card p {
+            font-size: 0.95rem;
+            color: #5b574f;
+        }
+
+        .adv-card .icon-place {
+            font-size: 1.6rem;
+            display: block;
+            margin-bottom: 0.4rem;
+            color: #b4945a;
+        }
+
+        /* 说明区 */
+        .explain-block {
+            background: #faf8f5;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            margin: 2rem 0 3rem;
+            border: 1px solid #eae5db;
+        }
+
+        .explain-block p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .explain-block strong {
+            color: #8a703a;
+        }
+
+        .key-link {
+            color: #936f2f;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #d4bc8a;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .key-link:hover {
+            color: #5e4819;
+            border-bottom-color: #5e4819;
+        }
+
+        /* FAQ 摘要 */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem 2rem;
+            margin: 1.8rem 0 2.5rem;
+        }
+
+        .faq-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e1dbcf;
+        }
+
+        .faq-item h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            color: #3a3730;
+        }
+
+        .faq-item p {
+            font-size: 0.9rem;
+            color: #5f5b52;
+        }
+
+        .faq-note {
+            font-size: 0.9rem;
+            color: #7a756a;
+            margin-top: 1rem;
+            border-top: 1px solid #ddd8cc;
+            padding-top: 1.2rem;
+        }
+
+        /* 底部链接 */
+        .footer-links {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #d9d3c7;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+        }
+
+        .footer-links .copy {
+            font-size: 0.85rem;
+            color: #6b665c;
+        }
+
+        .footer-links .link-group a {
+            color: #5e4d2b;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-left: 1.2rem;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        .footer-links .link-group a:hover {
+            border-bottom-color: #5e4d2b;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .hero .sub { font-size: 1rem; }
+            .container { padding: 2rem 1rem; }
+            .explain-block { padding: 1.8rem 1.2rem; }
+            .footer-links { flex-direction: column; align-items: flex-start; }
+            .footer-links .link-group a { margin-left: 0; margin-right: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1>开元棋牌</h1>
+        <p class="sub">博弈的尺度，藏在规则与经验之间。不追求戏剧性的逆转，而专注每一局的结构与概率。</p>
+        <span class="tagline">策略 · 冷静 · 持续</span>
+    </header>
+
+    <main class="container">
+
+        <!-- 优势区 -->
+        <h2 class="section-title">核心支撑</h2>
+        <div class="grid-adv">
+            <div class="adv-card">
+                <span class="icon-place">♟</span>
+                <h3>规则透明</h3>
+                <p>所有牌桌逻辑与赔率均事先公示，无隐藏改动。参与者可随时核查对局记录。</p>
+            </div>
+            <div class="adv-card">
+                <span class="icon-place">⏳</span>
+                <h3>节奏自控</h3>
+                <p>从经典百家乐到快速骰宝，每局时长可选。短节奏适合碎片时间，长周期利于深度观察。</p>
+            </div>
+            <div class="adv-card">
+                <span class="icon-place">📊</span>
+                <h3>数据回溯</h3>
+                <p>内置历史路单与统计面板，帮助玩家回顾走势，而非依赖直觉或情绪下注。</p>
+            </div>
+            <div class="adv-card">
+                <span class="icon-place">🛡</span>
+                <h3>环境稳定</h3>
+                <p>采用多节点部署，降低延迟与中断概率。投注窗口、余额变动均有明确日志。</p>
+            </div>
+        </div>
+
+        <!-- 说明区 -->
+        <h2 class="section-title">关于博弈与决策</h2>
+        <div class="explain-block">
+            <p>棋牌类博弈的核心从来不是运气崇拜，而是基于有限信息的概率判断。<strong>开元棋牌</strong>提供的不是“必胜策略”，而是一套经过验证的牌桌基础设施。无论你偏好德州扑克的读人技巧，还是骰宝的赔率计算，清晰的界面与稳定的响应都是理性决策的前提。</p>
+            <p><a href="https://portal-kygaming.com" class="key-link">开元棋牌</a> 在游戏分类中保留了经典变体与标准规则两套并行体系。例如百家乐同时提供“免佣”与“标准”模式，玩家可根据自身对抽水比例的接受度切换。这种设计不是为了增加复杂度，而是让每个人能在熟悉的框架内调整参数。</p>
+            <p>一个常被忽略的细节：多数对局失利源于信息延迟或界面误触。我们优化了点击区域与确认弹窗，并将每手牌的时间戳精确到毫秒级。这些底层工作并不显眼，但它们构成了公平对局的基本屏障。</p>
+        </div>
+
+        <!-- FAQ 摘要 -->
+        <h2 class="section-title">常见关注点</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <h4>是否需要下载客户端？</h4>
+                <p>不需要。网页端直接运行，主流浏览器均可。移动端自适应布局，无需额外安装。</p>
+            </div>
+            <div class="faq-item">
+                <h4>如何查看历史对局？</h4>
+                <p>每张牌桌右侧均提供「路单」面板，默认显示最近30手。支持按日期筛选与导出文本摘要。</p>
+            </div>
+            <div class="faq-item">
+                <h4>最低投注额度是多少？</h4>
+                <p>不同桌型设有独立底注，通常为 5 元起。高倍率区域设有上限，具体以桌面标注为准。</p>
+            </div>
+            <div class="faq-item">
+                <h4>是否提供试玩模式？</h4>
+                <p>部分游戏开放体验桌，使用虚拟筹码测试策略。体验桌的赔率与实时桌完全一致。</p>
+            </div>
+        </div>
+        <div class="faq-note">
+            ※ 以上回答基于平台通用设置，实际规则以对应游戏页面的说明为准。
+        </div>
+
+        <!-- 底部链接 -->
+        <footer class="footer-links">
+            <div class="copy">
+                © 2025 · 理性娱乐 · 适可而止
+            </div>
+            <div class="link-group">
+                <a href="https://portal-kygaming.com">开元棋牌</a>
+                <a href="#faq">规则说明</a>
+                <a href="#contact">联络支持</a>
+            </div>
+        </footer>
+
+    </main>
+</body>
+</html>
